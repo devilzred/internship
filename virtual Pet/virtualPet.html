@@ -1,23 +1,39 @@
 <!DOCTYPE html>
-    <head>
-        <title>Dream Pet</title>
-        <script src="virtualPet.js"></script>
-        <link rel="stylesheet" href="virtualPet.css">
-    </head>
-    <body>
-        
-        <h1>Hi I am Peggy</h1>
-        
-        <img id="pethappy" src="img/virtualpet_happy.png">
-        <img id="petsad" src="img/virtualpet_sad.png">
-        <img id="petangry" src="img/virtualpet_angry.png">
-        <img id="petbored" src="img/virtualpet_bored.png">
-        <br>
-        <div>
-            <button id="happy" onclick="happyPet()">Happy</button>
-            <button id="sad" onclick="sadPet()">Sad</button>
-            <button id="angry" onclick="angryPet()">Angry</button>
-            <button id="bored" onclick="boredPet()">Bored</button>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Pet</title>
+    <link rel="stylesheet" href="virtualPet.css">
+</head>
+<body>
+    <h1 id="title">My Virtual Pet</h1>
+    <div id="name">
+        <input type="text" id="pet-name" placeholder="Give me a name">
+        <button id="submit-name" onclick="givePetName()">
+            <img src="icon/play.svg" alt="Submit" id="submit-icon">
+        </button>
+    </div>
+
+    <div id="main-container">
+        <div id="action-buttons">
+            <button class="action-button" id="play-button">Play</button>
+            <button class="action-button" id="eat-button">Feed</button>
+            <button class="action-button" id="sleep-button">Sleep</button>
+            <button class="action-button" id="reset-button">Reset</button>
         </div>
-    </body>
+
+        <div id="pet-container">
+            <img id="pet-image" src="img/virtualpet_happy.png" alt="Virtual Pet">
+        </div>
+
+        <div id="displaystate">
+            <h2>Happiness: <span id="happiness-state">10</span></h2>
+            <h2>Hunger: <span id="hunger-state">10</span></h2>
+            <h2>Energy: <span id="energy-state">10</span></h2>
+        </div>
+    </div>
+
+    <script src="virtualPet.js"></script>
+</body>
 </html>
