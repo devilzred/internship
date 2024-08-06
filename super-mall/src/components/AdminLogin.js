@@ -1,39 +1,52 @@
 // src/components/AdminLogin.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../firebase';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const auth = getAuth();
 
-  const handleAdminLogin = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const q = query(collection(db, 'admins'), where('email', '==', email), where('password', '==', password));
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
+    setError('');
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
       navigate('/admin-dashboard');
-    } else {
-      alert('Invalid email or password');
+    } catch (err) {
+      setError('Failed to log in. Please check your credentials.');
     }
   };
 
   return (
     <div>
       <h2>Admin Login</h2>
-      <form onSubmit={handleAdminLogin}>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <form onSubmit={handleLogin}>
         <div>
-          <label>Email</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
         <div>
-          <label>Password</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </div>
         <button type="submit">Login</button>
       </form>
+      <button className="go-back-button" onClick={() => navigate('/')}>Go Back</button>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-// src/components/AdminDashboard.js
 import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import CreateShop from './CreateShop';
@@ -6,6 +5,7 @@ import ManageShops from './ManageShops';
 import ManageFloors from './ManageFloors';
 import ManageCategories from './ManageCategories';
 import ManageOffers from './ManageOffers';
+import Logout from './Logout';
 
 const AdminDashboard = () => {
   return (
@@ -18,6 +18,7 @@ const AdminDashboard = () => {
           <li><Link to="manage-floors">Manage Floors</Link></li>
           <li><Link to="manage-categories">Manage Categories</Link></li>
           <li><Link to="manage-offers">Manage Offers</Link></li>
+          <li><Link to="sign-out">Logout</Link></li>
         </ul>
       </nav>
 
@@ -27,6 +28,7 @@ const AdminDashboard = () => {
         <Route path="manage-floors" element={<ManageFloors />} />
         <Route path="manage-categories" element={<ManageCategories />} />
         <Route path="manage-offers" element={<ManageOffers />} />
+        <Route path="sign-out" element={<Logout />} />
       </Routes>
     </div>
   );
